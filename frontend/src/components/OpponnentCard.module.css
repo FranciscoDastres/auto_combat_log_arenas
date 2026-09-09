@@ -1,0 +1,48 @@
+/* frontend/src/components/OpponentCard.module.css */
+.card {
+  background-color: #1e1e1e;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 16px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.header {
+  border-bottom: 1px solid #444;
+  padding-bottom: 8px;
+}
+
+.name {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #ff8000;
+}
+
+.realm {
+  font-size: 0.85rem;
+  color: #aaa;
+}
+
+.highlight {
+  color: #00ff02;
+  font-weight: bold;
+}
+
+.error {
+  color: #ff4d4d;
+  font-size: 0.9rem;
+}
+
+.link {
+  margin-top: 8px;
+  color: #00bfff;
+  text-decoration: none;
+  font-size: 0.85rem;
+}
+
+.link:hover {
+  text-decoration: underline;
+}

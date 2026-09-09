@@ -1,35 +1,34 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from "react";
+import { useArenaSocket } from "./hooks/useArenaSocket";
+import { OpponentCard } from "./components/OpponentCard";
+import styles from "./App.module.css";
 
-function App() {
-  const [count, setCount] = useState(0)
+export const App: React.FC = () => {
+  const { opponents, status } = useArenaSocket();
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <main className={styles.container}>
+      <header className={styles.header}>
+        <h1>WoW Arena Tracker</h1>
+        <span className={`${styles.badge} ${styles[status]}`}>
+          {status.toUpperCase()}
+        </span>
+      </header>
 
-export default App
+      <section className={styles.grid}>
+        {opponents.length > 0 ? (
+          opponents.map((opp, idx) => (
+            <OpponentCard
+              key={`${opp.name}-${opp.realm}-${idx}`}
+              opponent={opp}
+            />
+          ))
+        ) : (
+          <p className={styles.empty}>Esperando entrada a la arena...</p>
+        )}
+      </section>
+    </main>
+  );
+};
+
+export default App;
